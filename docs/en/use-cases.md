@@ -29,7 +29,12 @@ A small HDMI stick that plugs into any TV and generates digital signage on deman
 - Task scope is bounded: rectangular canvas, short text, optional images.
 - The hardware is dumb — it's just a browser pointed at a rendering endpoint.
 
-**Go-to-market:** restaurants, conference rooms, retail, small offices, real-estate open houses.
+**What this unlocks for the customer**
+- **Designer-quality output without hiring a designer.** Non-designers (shop owner, office manager, event host) can produce layouts that look professionally made. The model handles typography, hierarchy, color, whitespace.
+- **Real-time on-premise correction.** Staff standing in front of the TV can say *"bigger headline"*, *"swap to today's soup"*, or *"add a QR code to the lunch menu"* and the display updates in seconds. No back-and-forth with an external designer, no file re-uploads, no CMS portal.
+- **Context-aware content refresh.** Tie it to time/day/occupancy and the signage adapts itself: lunch specials automatically switch to dinner, meeting rooms update their "next session" card, waiting rooms rotate through relevant messages.
+
+**Go-to-market:** restaurants, conference rooms, retail, small offices, real-estate open houses, clinics, coworking lobbies.
 
 ---
 
@@ -42,18 +47,26 @@ A USB-C or hardware KVM bridge that attaches to a user's computer, iPad, or iPho
 
 | Task | Tier | Why |
 |---|---|---|
-| Play Chess autonomously | 🟢 Feasible | Bounded state space. Chess engines solve the strategy; the agent just drives the UI. |
-| Batch-process Excel files | 🟠 Ambitious | Spreadsheet category at 58. Works for clean data; brittle on messy real-world files. |
-| Photo editing (Lightroom, Photoshop) | 🟠 Ambitious | GUI use at 42. Agents can follow a recipe but struggle with taste and iteration. |
+| iMessage / text autonomous replies | 🟢 Feasible | Proven to work. Short messages, known recipients, routine content. Agent drafts and sends. |
+| Chess autonomously | 🟢 Feasible | Bounded state space. Chess engines solve the strategy; the agent just drives the UI. |
+| File organization (rename, sort, tag by content) | 🟢 Feasible | Structured, tool-use-like. Agent reads filenames and metadata and acts. |
+| Batch-process Excel files | 🟠 Ambitious | Spreadsheet 58. Works for clean data; brittle on messy real-world files. |
+| Form filling (tax, insurance, onboarding) | 🟠 Ambitious | Tool-use + GUI. Standard forms fine; long multi-page flows trickier. |
+| Computer troubleshooting (disk cleanup, BSOD, viruses) | 🟠 Ambitious | Multi-step GUI across admin tools. Needs guardrails on destructive actions. |
+| Meeting setup (join Zoom, share screen, audio control) | 🟠 Ambitious | GUI varies across Zoom/Meet/Teams; small action space but many edge cases. |
+| Software install + configuration wizards | 🟠 Ambitious | Structured GUI flow with branching prompts. |
+| Photo editing (Lightroom, Photoshop) | 🟠 Ambitious | GUI 42. Recipe-following works; taste and iteration unreliable. |
 | 3D printing slicer operations | 🔴 Experimental | GUI + narrow domain software. Few training examples; errors are physical. |
-| Social media content + replies | 🔴 Experimental | Communication at 38. Drafting works; judgment about tone and context is unreliable. |
-| Video editing (DaVinci, Premiere) | 🔴 Experimental | GUI + creative judgment + long workflows. Demos exist; production reliability does not. |
+| Social media content + replies | 🔴 Experimental | Communication 38. Drafting works; tone/brand judgment unreliable. |
+| Video editing (DaVinci, Premiere) | 🔴 Experimental | GUI + creative judgment + long workflows. Demos exist; production reliability doesn't. |
 
-**Design implication:** sell the KVM with the chess / spreadsheet tier as the anchor value prop. Position creative tasks as "preview" or "beta" rather than shipped autonomy. Users who trust it with Excel today will trust it with photos next year as scores climb.
+**Design implication:** sell the KVM with the green-tier tasks as the anchor value prop (iMessage, chess, file organization). Position orange-tier as "works with oversight" (troubleshooting, forms, Excel, meeting joins). Frame red-tier as "preview / beta" until scores climb. Users who trust the gadget with iMessage today will trust it with photo editing next year as the ladder fills in.
 
 ---
 
-## 3. Autonomous coding box for overnight dev work {% include mat-badge.html score=85 %}
+<div class="rejected-idea" markdown="1">
+
+## ~~3. Autonomous coding box for overnight dev work~~ <span class="rejected-badge">Not selected</span>
 {:#coding-box}
 
 **Primary category:** CLI / Coding (85)
@@ -67,9 +80,11 @@ A small appliance (Raspberry Pi-class) wired into a developer's repo with scoped
 
 Hardware differentiation isn't the silicon — it's the trust story: *"the box has only your keys, runs in your home, never sees the public internet except for package installs."*
 
----
+</div>
 
-## 4. Home office API hub {% include mat-badge.html score=72 %}
+<div class="rejected-idea" markdown="1">
+
+## ~~4. Home office API hub~~ <span class="rejected-badge">Not selected</span>
 {:#api-hub}
 
 **Primary category:** API / Tool Use (72)
@@ -82,9 +97,11 @@ An always-on desk device that unifies calendar, email, Slack, and smart-home API
 
 Differentiation: physical embodiment + privacy + curated tools. The software is 80% there; the product is 100% about packaging.
 
----
+</div>
 
-## 5. Spreadsheet appliance for small-business ops {% include mat-badge.html score=58 %}
+<div class="rejected-idea" markdown="1">
+
+## ~~5. Spreadsheet appliance for small-business ops~~ <span class="rejected-badge">Not selected</span>
 {:#spreadsheet-appliance}
 
 **Primary category:** Spreadsheet / Files (58)
@@ -98,9 +115,11 @@ Desk-top display + microphone next to the shop POS or office desk. Speak an upda
 
 Edge: the display-plus-voice form factor sidesteps the GUI reliability gap (42) by editing data files server-side, not by driving Excel or Google Sheets GUIs.
 
----
+</div>
 
-## 6. Research appliance for long-form web dives {% include mat-badge.html score=55 %}
+<div class="rejected-idea" markdown="1">
+
+## ~~6. Research appliance for long-form web dives~~ <span class="rejected-badge">Not selected</span>
 {:#research-box}
 
 **Primary category:** Web / Browser (55), BrowseComp-class tasks
@@ -114,9 +133,11 @@ A desktop device that runs overnight persistent-search tasks: *"research all pub
 
 Differentiation: a dedicated long-running agent is much better than "ask ChatGPT" for jobs that take hours and require source tracking.
 
----
+</div>
 
-## 7. Exec assistant earpiece {% include mat-badge.html score=38 %}
+<div class="rejected-idea" markdown="1">
+
+## ~~7. Exec assistant earpiece~~ <span class="rejected-badge">Not selected</span>
 {:#earpiece}
 
 **Primary category:** Communication / Assistant (38)
@@ -130,9 +151,11 @@ Earbud + lapel mic that listens through the user's day, offers whispers ("call w
 
 Honest framing: market this as "extended memory + suggestion engine", not "your AI Chief of Staff". Drafting assistance is genuinely good; autonomy isn't.
 
----
+</div>
 
-## 8. Narrow-scope household task robot {% include mat-badge.html score=22 %}
+<div class="rejected-idea" markdown="1">
+
+## ~~8. Narrow-scope household task robot~~ <span class="rejected-badge">Not selected</span>
 {:#robot}
 
 **Primary category:** Device / Robotics (22)
@@ -146,16 +169,18 @@ A robot that does one or two bounded household tasks reliably — folds laundry 
 
 What *is* viable: bounded single-task robots (bed-making, pet-feeding, specific cooking steps) where the physical environment can be standardized.
 
+</div>
+
 ---
 
 ## Cross-cutting patterns
 
 1. **Hardware should narrow the problem, not expand it.** An HDMI stick bounds the task to "generate signage"; a general tablet invites users to expect everything. Constraint creates reliability.
 
-2. **Review gates ship features, not autonomy.** Every orange/red-tier idea above works if you add a "review this" step. The same tech that's embarrassing autonomously is useful as a copilot.
+2. **Review gates ship features, not autonomy.** Every orange/red-tier task works if you add a "review this" step. The same tech that's embarrassing autonomously is useful as a copilot.
 
 3. **Privacy + on-device is a real story for 2026.** "Your keys, your data, physical hardware you can see" differentiates against cloud-only tools — especially in SMB and enterprise.
 
-4. **Pair a strong category with a weak one.** The spreadsheet appliance survives because it uses the ambitious spreadsheet tier but sidesteps the weak GUI tier by editing data files server-side. Design around the weak link.
+4. **Pair a strong capability with a weak one.** The signage dongle succeeds because creative generation is mature AND the task is bounded to a single rectangle. The KVM gadget's ladder exists because each task mixes mature categories (tool-use) with weaker ones (GUI). Design around the weak link.
 
 5. **Scores climb ~10-15 pts/year on active benchmarks.** Something red today may be orange in 18 months. Build a product that gets *better* as models improve, not one that has to be rebuilt.
