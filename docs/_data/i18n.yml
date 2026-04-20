@@ -1,0 +1,70 @@
+# UI string translations. Accessed in templates via site.data.i18n[page.lang].<key>
+#
+# When adding a string, add BOTH languages. Use English as the source of truth.
+
+en:
+  site_title: AI Agent Progress
+  nav_benchmark: Benchmark
+  nav_progress: Current Progress
+  nav_lang_en: EN
+  nav_lang_zh: 中文
+
+  dash_title: AI Agent Technology Progress
+  dash_lede: >
+    Benchmark scores over time, grouped by agent action category. Higher is better.
+    All scores are percentages. Each row is one benchmark; each column is a reported
+    snapshot date with the top score and system at that date.
+  dash_stats_benchmarks: benchmarks
+  dash_stats_datapoints: datapoints
+  dash_stats_dates: distinct dates
+
+  col_benchmark: Benchmark
+  col_human: Human
+  col_human_title: Human baseline
+  col_latest: Latest
+  no_data: no data
+
+  legend_title: Reading this table
+  legend_items:
+    - "<strong>Rank</strong> reflects practical production maturity as of the latest snapshot, not marketing hype."
+    - "Scores <strong>across different benchmarks are not directly comparable.</strong> 70% on SpreadsheetBench is not the same difficulty as 70% on SWE-bench."
+    - "Each date column shows the top score reported on that date. Many dates are vendor-announcement days (e.g. Claude / GPT-5 releases)."
+    - "Empty cells mean no reported score at that snapshot. Empty rows mean we have no data yet."
+    - "Data lives in <code>docs/_data/benchmarks.yml</code>. A scheduled agent proposes weekly updates via pull request."
+
+  footer_updated: Updated weekly
+  footer_data_file: Data file
+  footer_source: Source on GitHub
+
+zh-tw:
+  site_title: AI Agent 技術進展
+  nav_benchmark: 基準更新
+  nav_progress: 技術現況
+  nav_lang_en: EN
+  nav_lang_zh: 中文
+
+  dash_title: AI Agent 技術進展儀表板
+  dash_lede: >
+    依照 agent 行動類別分組的 benchmark 成績變化。分數越高越好，單位為百分比。
+    每一列為一個 benchmark；每一欄為一個回報日期，顯示當日最佳分數與對應系統。
+  dash_stats_benchmarks: 項 benchmark
+  dash_stats_datapoints: 筆資料
+  dash_stats_dates: 個日期快照
+
+  col_benchmark: Benchmark
+  col_human: 人類
+  col_human_title: 人類基準
+  col_latest: 最新
+  no_data: 無資料
+
+  legend_title: 閱讀提示
+  legend_items:
+    - "<strong>排名</strong> 反映最新快照下的實務落地成熟度，不是行銷熱度。"
+    - "不同 benchmark 之間的分數 <strong>不能直接比較</strong>。SpreadsheetBench 的 70% 與 SWE-bench 的 70% 並非同等難度。"
+    - "每個日期欄顯示該日期回報的最佳分數。許多日期對應廠商發表日（例如 Claude、GPT-5 發表日）。"
+    - "空白欄位代表該日期沒有回報；整列空白代表尚未收錄資料。"
+    - "資料來源為 <code>docs/_data/benchmarks.yml</code>；排程 agent 每週以 pull request 形式提交更新。"
+
+  footer_updated: 每週更新
+  footer_data_file: 資料檔
+  footer_source: GitHub 原始碼

@@ -1,0 +1,14 @@
+{%- comment -%}
+  Render a colored maturity badge for a category.
+  Inputs:
+    include.score = integer 0-100 (required)
+    include.label = optional prefix text (default: "maturity")
+  Example:
+    {% include mat-badge.html score=cat.maturity_score %}
+{%- endcomment -%}
+{%- assign s = include.score -%}
+{%- if s >= 70 -%}{%- assign tier = "high" -%}
+{%- elsif s >= 40 -%}{%- assign tier = "mid" -%}
+{%- else -%}{%- assign tier = "low" -%}
+{%- endif -%}
+<span class="mat-badge mat-{{ tier }}" title="Maturity score {{ s }}/100">{{ s }}</span>

@@ -1,0 +1,381 @@
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --border: #e5e5e4;
+  --text: #18181b;
+  --muted: #737373;
+  --accent: #2563eb;
+  --accent-soft: #dbeafe;
+  --good: #15803d;
+  --mid: #b45309;
+  --weak: #b91c1c;
+
+  /* Column emphasis tints */
+  --human-bg: #fdf4e3;        /* amber-50 */
+  --human-text: #92400e;       /* amber-800 */
+  --human-border: #fcd78a;     /* amber-200 */
+  --latest-bg: #ecfdf5;        /* emerald-50 */
+  --latest-text: #065f46;      /* emerald-800 */
+  --latest-border: #a7f3d0;    /* emerald-200 */
+
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.55 var(--sans);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Header */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+.site-title {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1rem;
+}
+.site-nav { display: flex; align-items: center; gap: 1.1rem; }
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.15rem 0;
+  border-bottom: 1.5px solid transparent;
+}
+.site-nav a:hover { color: var(--text); }
+.site-nav a.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+.site-nav .nav-sep {
+  display: inline-block;
+  width: 1px;
+  height: 1rem;
+  background: var(--border);
+  margin: 0 0.1rem;
+}
+
+/* Intro */
+.intro { padding: 2rem 0 1rem; }
+.intro h1 {
+  font-size: 1.75rem;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+.intro .lede {
+  color: var(--muted);
+  max-width: 65ch;
+  margin: 0 0 0.75rem;
+}
+.intro .meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+.intro .meta a { color: var(--accent); text-decoration: none; }
+.intro .meta a:hover { text-decoration: underline; }
+
+/* Category sections */
+.category {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.category h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.category h2 .rank {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: var(--bg);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* Maturity badge — 0-100 score with three color tiers. */
+.mat-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  vertical-align: middle;
+  letter-spacing: 0.02em;
+}
+.mat-badge.mat-high {
+  background: #dcfce7;      /* green-100 */
+  color: #14532d;           /* green-900 */
+  border-color: #86efac;    /* green-300 */
+}
+.mat-badge.mat-mid {
+  background: #ffedd5;      /* orange-100 */
+  color: #7c2d12;           /* orange-900 */
+  border-color: #fdba74;    /* orange-300 */
+}
+.mat-badge.mat-low {
+  background: #fee2e2;      /* red-100 */
+  color: #7f1d1d;           /* red-900 */
+  border-color: #fca5a5;    /* red-300 */
+}
+.category-summary {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  max-width: 70ch;
+}
+
+/* Table */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.progress-table {
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  table-layout: fixed;
+  /* Exactly the sum of column widths — no stretching. Benchmark / Human / Latest
+     columns line up perfectly across every category table, regardless of how
+     many date columns each table has. Wide tables scroll inside .table-wrap. */
+  width: max-content;
+}
+.progress-table thead {
+  background: var(--bg);
+}
+.progress-table th,
+.progress-table td {
+  padding: 0.7rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+/* Numeric columns: right-aligned with tabular digits so decimals line up */
+.progress-table th.human-col,
+.progress-table th.latest-col,
+.progress-table th.date-col,
+.progress-table td.human-cell,
+.progress-table td.latest-cell,
+.progress-table td.score-cell {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.progress-table thead th {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border);
+}
+.progress-table tbody tr:last-child th,
+.progress-table tbody tr:last-child td { border-bottom: none; }
+
+/* Fixed column widths — identical across every category table so the first
+   three columns (Benchmark / Human / Latest) line up perfectly when you
+   scan the page top-to-bottom. */
+.benchmark-col { width: 240px; }
+.human-col     { width: 100px; white-space: nowrap; font-family: var(--mono); }
+.latest-col    { width: 170px; }
+.date-col      { width: 120px; white-space: nowrap; font-family: var(--mono); }
+
+/* Column-wide emphasis: Human + Latest stand out from the date columns */
+.progress-table th.human-col,
+.progress-table td.human-cell {
+  background: var(--human-bg);
+  border-left: 1px solid var(--human-border);
+  border-right: 1px solid var(--human-border);
+}
+.progress-table thead th.human-col {
+  color: var(--human-text);
+  border-top: 1px solid var(--human-border);
+}
+.progress-table td.human-cell .score,
+.progress-table td.human-cell a.human-link {
+  color: var(--human-text);
+}
+
+.progress-table th.latest-col,
+.progress-table td.latest-cell {
+  background: var(--latest-bg);
+  border-left: 1px solid var(--latest-border);
+  border-right: 1px solid var(--latest-border);
+}
+.progress-table thead th.latest-col {
+  color: var(--latest-text);
+  border-top: 1px solid var(--latest-border);
+}
+.progress-table td.latest-cell .score {
+  color: var(--latest-text);
+}
+
+.benchmark-cell { font-weight: 600; }
+.benchmark-cell .b-name { display: block; }
+.benchmark-cell .b-desc {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
+  max-width: 30ch;
+}
+
+.score-cell, .latest-cell, .human-cell { font-family: var(--mono); }
+.score-cell .score, .latest-cell .score, .human-cell .score, .human-cell .human-link {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+.score-cell .system, .latest-cell .system {
+  display: block;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-family: var(--sans);
+  margin-top: 0.15rem;
+  max-width: 14ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: auto;
+}
+.latest-cell .date {
+  display: block;
+  color: var(--muted);
+  font-size: 0.7rem;
+  margin-top: 0.1rem;
+  font-family: var(--mono);
+}
+.score-cell .src {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-decoration: none;
+  margin-top: 0.15rem;
+}
+.score-cell .src:hover { color: var(--accent); }
+
+.muted { color: var(--muted); opacity: 0.5; }
+.muted.na {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  cursor: help;
+  border-bottom: 1px dotted var(--muted);
+}
+
+.human-link {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--muted);
+  cursor: help;
+}
+.human-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Legend */
+.legend {
+  margin: 3rem 0 2rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.legend h2 {
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+.legend ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.legend li { margin-bottom: 0.35rem; }
+.legend code {
+  font-family: var(--mono);
+  font-size: 0.82em;
+  background: var(--bg);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+/* Long-form article pages */
+.long-form {
+  margin: 2rem 0;
+  background: var(--surface);
+  padding: 2.25rem 3rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.long-form p,
+.long-form li {
+  max-width: 78ch;  /* keep prose line length readable even if card is wider */
+}
+.long-form h1 { font-size: 1.75rem; margin-top: 0; }
+.long-form h2 { font-size: 1.2rem; margin-top: 2rem; }
+.long-form h3 { font-size: 1rem; margin-top: 1.5rem; color: var(--muted); }
+.long-form ul, .long-form ol { padding-left: 1.25rem; }
+.long-form hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
+.long-form code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--bg);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+.long-form a { color: var(--accent); }
+
+/* Footer — minimal (empty by default). Kept as a structural element so the
+   page has breathing room below content; add markup back in default.html
+   if you want to surface something here. */
+.site-footer {
+  margin-top: 3rem;
+  padding: 1rem 0;
+}
+.site-footer:empty,
+.site-footer .container:empty { display: none; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .intro h1 { font-size: 1.4rem; }
+  .category { padding: 1rem; }
+  .long-form { padding: 1.25rem; margin: 1rem 0.5rem; }
+  .site-nav { gap: 0.75rem; }
+}

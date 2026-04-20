@@ -1,0 +1,132 @@
+{%- comment -%}
+  Dashboard body — shared between /en/ and /zh-tw/. Uses page.lang to pick between
+  English and Traditional Chinese strings from site.data.i18n.
+{%- endcomment -%}
+
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign is_zh = false -%}
+{%- if page.lang == "zh-tw" -%}{%- assign is_zh = true -%}{%- endif -%}
+
+{%- assign all_dates = "" | split: "" -%}
+{%- assign total_points = 0 -%}
+{%- for b in site.data.benchmarks -%}
+  {%- for h in b.history -%}
+    {%- assign all_dates = all_dates | push: h.date -%}
+    {%- assign total_points = total_points | plus: 1 -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign all_dates = all_dates | uniq | sort -%}
+
+<section class="intro">
+  <h1>{{ t.dash_title }}</h1>
+  <p class="lede">{{ t.dash_lede }}</p>
+  <p class="meta">
+    {{ site.data.benchmarks | size }} {{ t.dash_stats_benchmarks }} ·
+    {{ total_points }} {{ t.dash_stats_datapoints }} ·
+    {{ all_dates | size }} {{ t.dash_stats_dates }}
+  </p>
+</section>
+
+{%- for cat in site.data.categories -%}
+  {%- assign cat_benchmarks = site.data.benchmarks | where: "category", cat.slug -%}
+  {%- if cat_benchmarks.size > 0 -%}
+
+    {%- assign cat_dates = "" | split: "" -%}
+    {%- for b in cat_benchmarks -%}
+      {%- for h in b.history -%}
+        {%- assign cat_dates = cat_dates | push: h.date -%}
+      {%- endfor -%}
+    {%- endfor -%}
+    {%- assign cat_dates = cat_dates | uniq | sort | reverse -%}
+
+    <section class="category" id="{{ cat.slug }}">
+      <h2>
+        <span class="rank">#{{ cat.maturity_rank }}</span>
+        {%- if is_zh -%}{{ cat.name_zh }}{%- else -%}{{ cat.name }}{%- endif -%}
+        {%- if cat.maturity_score -%}
+          {% include mat-badge.html score=cat.maturity_score %}
+        {%- endif -%}
+      </h2>
+      <p class="category-summary">
+        {%- if is_zh -%}{{ cat.summary_zh | default: cat.summary }}{%- else -%}{{ cat.summary }}{%- endif -%}
+      </p>
+
+      <div class="table-wrap">
+        <table class="progress-table">
+          <thead>
+            <tr>
+              <th class="benchmark-col">{{ t.col_benchmark }}</th>
+              <th class="human-col" title="{{ t.col_human_title }}">{{ t.col_human }}</th>
+              <th class="latest-col">{{ t.col_latest }}</th>
+              {%- for d in cat_dates -%}
+                <th class="date-col">{{ d }}</th>
+              {%- endfor -%}
+            </tr>
+          </thead>
+          <tbody>
+            {%- for b in cat_benchmarks -%}
+            <tr>
+              <th scope="row" class="benchmark-cell">
+                <span class="b-name">{{ b.benchmark }}</span>
+                {%- assign desc = b.description -%}
+                {%- if is_zh and b.description_zh -%}{%- assign desc = b.description_zh -%}{%- endif -%}
+                {%- if desc -%}
+                  <span class="b-desc">{{ desc }}</span>
+                {%- endif -%}
+              </th>
+              <td class="human-cell">
+                {%- if b.human_baseline -%}
+                  {%- if b.human_baseline_source -%}
+                    <a class="human-link" href="{{ b.human_baseline_source }}" target="_blank" rel="noopener"
+                       title="{{ b.human_baseline_note | default: 'Human baseline source' }}">{{ b.human_baseline }}%</a>
+                  {%- else -%}
+                    <span title="{{ b.human_baseline_note | default: '' }}">{{ b.human_baseline }}%</span>
+                  {%- endif -%}
+                {%- else -%}
+                  <span class="muted na" title="{{ b.human_baseline_note | default: 'Not published by benchmark authors' }}">n/a</span>
+                {%- endif -%}
+              </td>
+
+              {%- assign sorted_hist = b.history | sort: "date" -%}
+              {%- assign latest = sorted_hist | last -%}
+              <td class="latest-cell">
+                {%- if latest -%}
+                  <span class="score">{{ latest.score }}%</span>
+                  <span class="system">{{ latest.system }}</span>
+                  <span class="date">{{ latest.date }}</span>
+                {%- else -%}
+                  <span class="muted">{{ t.no_data }}</span>
+                {%- endif -%}
+              </td>
+
+              {%- for d in cat_dates -%}
+                {%- assign cell = b.history | where: "date", d | sort: "score" | last -%}
+                <td class="score-cell">
+                  {%- if cell -%}
+                    <span class="score">{{ cell.score }}%</span>
+                    <span class="system" title="{{ cell.system }}">{{ cell.system }}</span>
+                    {%- if cell.source -%}
+                      <a class="src" href="{{ cell.source }}" target="_blank" rel="noopener" aria-label="source">↗</a>
+                    {%- endif -%}
+                  {%- else -%}
+                    <span class="muted">—</span>
+                  {%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {%- endif -%}
+{%- endfor -%}
+
+<section class="legend">
+  <h2>{{ t.legend_title }}</h2>
+  <ul>
+    {%- for item in t.legend_items -%}
+      <li>{{ item }}</li>
+    {%- endfor -%}
+  </ul>
+</section>

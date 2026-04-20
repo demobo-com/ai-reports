@@ -1,0 +1,530 @@
+# Benchmark history data.
+#
+# Each top-level entry is one benchmark. Append to `history` to record a new
+# datapoint (date, system, score, source). Scores are percentages (0-100).
+#
+# Keep entries within each benchmark's `history` sorted oldest-first.
+# The front page renders all snapshots and highlights the latest.
+#
+# human_baseline is optional — set only when the benchmark authors publish one.
+# Use null otherwise.
+
+- benchmark: OSWorld
+  category: gui_computer
+  description: Real computer tasks across Ubuntu, Windows, macOS — desktop apps, files, browser, cross-app.
+  description_zh: 在 Ubuntu、Windows、macOS 上執行真實電腦任務——桌面應用、檔案、瀏覽器、跨應用。
+  human_baseline: 72.36
+  human_baseline_source: https://arxiv.org/abs/2404.07972
+  human_baseline_note: Original paper
+  history:
+    - date: 2024-04-11
+      system: GPT-4V (paper baseline)
+      score: 12.24
+      source: https://arxiv.org/abs/2404.07972
+    - date: 2024-10-22
+      system: Claude 3.5 Sonnet (new, screenshot-only)
+      score: 14.9
+      source: https://www.anthropic.com/news/3-5-models-and-computer-use
+    - date: 2024-10-22
+      system: Claude 3.5 Sonnet (new, extended steps)
+      score: 22.0
+      source: https://www.anthropic.com/news/3-5-models-and-computer-use
+    - date: 2025-01-23
+      system: OpenAI CUA (Operator)
+      score: 38.1
+      source: https://openai.com/index/computer-using-agent/
+    - date: 2025-04-17
+      system: Agent S2 + Claude 3.7 Sonnet
+      score: 34.5
+      source: https://arxiv.org/html/2504.00906v1
+      note: 50-step budget
+    - date: 2025-05-22
+      system: Claude Sonnet 4
+      score: 42.2
+      source: https://www.anthropic.com/news/claude-sonnet-4-5
+    - date: 2025-09-02
+      system: UI-TARS-2 (ByteDance)
+      score: 47.5
+      source: https://arxiv.org/html/2509.02544v1
+    - date: 2025-09-29
+      system: Claude Sonnet 4.5
+      score: 61.4
+      source: https://www.anthropic.com/news/claude-sonnet-4-5
+    - date: 2026-02-01
+      system: Claude Opus 4.6
+      score: 72.7
+      source: https://llm-stats.com/benchmarks/osworld
+      note: Aggregator source — re-verify against primary announcement
+    - date: 2026-04-16
+      system: Claude Opus 4.7
+      score: 78.0
+      source: https://www.vellum.ai/blog/claude-opus-4-7-benchmarks-explained
+      note: OSWorld-Verified variant
+
+- benchmark: WebArena
+  category: browser
+  description: End-to-end web navigation over realistic reproduced sites (Reddit, GitLab, e-commerce, etc.).
+  description_zh: 在重建的真實網站上（Reddit、GitLab、電商等）進行端到端網頁操作。
+  human_baseline: 78.24
+  human_baseline_source: https://arxiv.org/abs/2307.13854
+  human_baseline_note: Expert annotators, original paper
+  history:
+    - date: 2023-07-25
+      system: GPT-4 (paper)
+      score: 14.41
+      source: https://arxiv.org/abs/2307.13854
+    - date: 2024-09-01
+      system: AgentWorkflowMemory (open-source)
+      score: 35.5
+      source: https://webarena.dev/
+    - date: 2025-01-23
+      system: OpenAI CUA (Operator)
+      score: 58.1
+      source: https://openai.com/index/computer-using-agent/
+    - date: 2026-04-01
+      system: GPT-5.4 Pro
+      score: 65.8
+      source: https://lmcouncil.ai/benchmarks
+      note: Aggregator source
+    - date: 2026-04-01
+      system: Claude Opus 4.6
+      score: 64.5
+      source: https://lmcouncil.ai/benchmarks
+      note: Aggregator source
+
+- benchmark: WebVoyager
+  category: browser
+  description: Real live-web navigation, visually grounded, across mainstream sites.
+  description_zh: 主流網站上的真實網頁導航，強調視覺理解。
+  human_baseline: null
+  human_baseline_note: Not published by benchmark authors
+  history:
+    - date: 2024-01-24
+      system: WebVoyager agent (GPT-4V, paper)
+      score: 55.7
+      source: https://arxiv.org/abs/2401.13919
+    - date: 2025-01-23
+      system: OpenAI CUA (Operator)
+      score: 87.0
+      source: https://openai.com/index/computer-using-agent/
+    - date: 2025-01-23
+      system: Anthropic Computer Use
+      score: 56.0
+      source: https://www.technologyreview.com/2025/01/23/1110484/openai-launches-operator-an-agent-that-can-use-a-computer-for-you/
+    - date: 2025-01-23
+      system: Google Project Mariner
+      score: 83.5
+      source: https://www.technologyreview.com/2025/01/23/1110484/openai-launches-operator-an-agent-that-can-use-a-computer-for-you/
+    - date: 2025-01-30
+      system: Browser Use
+      score: 89.1
+      source: https://browser-use.com/posts/sota-technical-report
+    - date: 2025-03-01
+      system: Skyvern 2.0
+      score: 85.85
+      source: https://www.skyvern.com/blog/skyvern-2-0-state-of-the-art-web-navigation-with-85-8-on-webvoyager-eval/
+    - date: 2026-02-01
+      system: Surfer 2 (H Company)
+      score: 97.1
+      source: https://leaderboard.steel.dev/
+
+- benchmark: VisualWebArena
+  category: browser
+  description: Visually grounded variant of WebArena — requires interpreting page visuals.
+  description_zh: WebArena 的視覺版；需要判讀頁面圖像。
+  human_baseline: 88.7
+  human_baseline_source: https://arxiv.org/abs/2401.13649
+  human_baseline_note: Original paper
+  history:
+    - date: 2024-01-24
+      system: GPT-4V + SoM (paper)
+      score: 16.37
+      source: https://arxiv.org/abs/2401.13649
+    - date: 2024-06-06
+      system: GPT-4o + SoM
+      score: 19.78
+      source: https://arxiv.org/html/2401.13649v2
+    - date: 2024-06-06
+      system: Gemini Pro 1.5
+      score: 12.4
+      source: https://arxiv.org/html/2401.13649v2
+
+- benchmark: BrowseComp
+  category: browser
+  description: Hard persistent-search benchmark — finding difficult-to-locate answers on the live web.
+  description_zh: 困難的持續搜尋任務；在真實網路上找到不易搜尋到的答案。
+  human_baseline: 29.2
+  human_baseline_source: https://cdn.openai.com/pdf/5e10f4ab-d6f7-442e-9508-59515c65e35d/browsecomp.pdf
+  human_baseline_note: OpenAI trainers, no AI assistants, bounded time (367/1255 solved)
+  history:
+    - date: 2025-04-10
+      system: GPT-4o (no browsing)
+      score: 0.6
+      source: https://openai.com/index/browsecomp/
+    - date: 2025-04-10
+      system: GPT-4o (with browsing)
+      score: 1.9
+      source: https://openai.com/index/browsecomp/
+    - date: 2025-04-10
+      system: OpenAI o1
+      score: 9.9
+      source: https://openai.com/index/browsecomp/
+    - date: 2025-04-10
+      system: OpenAI Deep Research
+      score: 51.5
+      source: https://openai.com/index/browsecomp/
+    - date: 2026-04-01
+      system: Claude Mythos Preview
+      score: 86.9
+      source: https://llm-stats.com/benchmarks/browsecomp
+      note: Aggregator source — verify
+
+- benchmark: SWE-bench Verified
+  category: cli_coding
+  description: Real GitHub issues from popular Python repos — fix bugs and pass the hidden test suite.
+  description_zh: 主流 Python repo 的真實 GitHub issue；修 bug 並通過隱藏測試。
+  human_baseline: null
+  human_baseline_note: Ill-defined — tasks are real merged PRs (100% by construction)
+  history:
+    - date: 2024-03-12
+      system: Devin (full SWE-bench)
+      score: 13.86
+      source: https://cognition.ai/blog/introducing-devin
+      note: Pre-Verified variant; comparability caveat
+    - date: 2024-08-13
+      system: GPT-4o (Verified launch)
+      score: 33.2
+      source: https://openai.com/index/introducing-swe-bench-verified/
+    - date: 2024-10-22
+      system: Claude 3.5 Sonnet (new)
+      score: 49.0
+      source: https://www.anthropic.com/news/3-5-models-and-computer-use
+    - date: 2024-12-20
+      system: OpenAI o1
+      score: 48.9
+      source: https://openai.com/index/introducing-o3/
+    - date: 2025-01-31
+      system: OpenAI o3
+      score: 71.7
+      source: https://en.wikipedia.org/wiki/OpenAI_o3
+    - date: 2025-02-24
+      system: Claude 3.7 Sonnet
+      score: 62.3
+      source: https://www.anthropic.com/news/claude-3-7-sonnet
+    - date: 2025-02-24
+      system: Claude 3.7 Sonnet (custom scaffold)
+      score: 70.3
+      source: https://www.anthropic.com/news/claude-3-7-sonnet
+    - date: 2025-03-25
+      system: Gemini 2.5 Pro
+      score: 63.8
+      source: https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/
+    - date: 2025-05-22
+      system: Claude Sonnet 4
+      score: 72.7
+      source: https://www.anthropic.com/news/claude-4
+    - date: 2025-08-07
+      system: GPT-5
+      score: 74.9
+      source: https://openai.com/index/introducing-gpt-5/
+    - date: 2025-09-29
+      system: Claude Sonnet 4.5
+      score: 77.2
+      source: https://www.anthropic.com/news/claude-sonnet-4-5
+    - date: 2025-11-24
+      system: Claude Opus 4.5
+      score: 80.9
+      source: https://www.anthropic.com/news/claude-opus-4-5
+    - date: 2026-04-01
+      system: GPT-5.3-Codex
+      score: 85.0
+      source: https://www.marc0.dev/en/leaderboard
+      note: Aggregator source
+    - date: 2026-04-16
+      system: Claude Opus 4.7
+      score: 87.6
+      source: https://www.marc0.dev/en/leaderboard
+      note: Aggregator source
+
+- benchmark: SWE-bench-Live
+  category: cli_coding
+  description: Live-updating SWE-bench variant that adds new repos/issues over time to resist training contamination.
+  description_zh: 持續更新的 SWE-bench 變體；定期新增 repo/issue 以降低訓練污染。
+  human_baseline: null
+  human_baseline_note: Ill-defined — tasks are real merged PRs (100% by construction)
+  history:
+    - date: 2025-05-21
+      system: Best agent-model pair (paper launch)
+      score: 22.96
+      source: https://arxiv.org/abs/2505.23419
+    - date: 2025-11-01
+      system: Claude Opus 4.5 + Live-SWE-agent
+      score: 79.2
+      source: https://live-swe-agent.github.io/
+
+- benchmark: Terminal-Bench
+  category: cli_coding
+  description: 80 hand-crafted tasks executed in real Linux terminal environments via Docker — scientific workflows, networking, data analysis, API calls, security. Stanford / Laude Institute, May 2025.
+  description_zh: 80 個人工精心設計的任務，透過 Docker 容器在真實 Linux 終端機中執行；涵蓋科學工作流、網路、資料分析、API 與資安。Stanford / Laude Institute，2025 年 5 月發佈。
+  human_baseline: null
+  human_baseline_note: No aggregate human pass-rate published; paper gives per-task expert time estimates instead
+  history:
+    - date: 2025-05-01
+      system: Claude 3.7 Sonnet (Terminus, launch)
+      score: 27
+      source: https://www.tbench.ai/about
+      note: Approximate launch-day number
+    - date: 2025-05-22
+      system: Claude Opus 4
+      score: 43.2
+      source: https://www.anthropic.com/news/claude-4
+    - date: 2025-09-24
+      system: Droid + Claude Opus 4.1
+      score: 58.8
+      source: https://www.tbench.ai/leaderboard/terminal-bench/1.0
+    - date: 2025-10-10
+      system: Ante + Claude Sonnet 4.5
+      score: 60.3
+      source: https://www.tbench.ai/leaderboard/terminal-bench/1.0
+    - date: 2025-10-15
+      system: Apex2 + Claude Sonnet 4.5
+      score: 64.5
+      source: https://www.tbench.ai/leaderboard/terminal-bench/1.0
+    - date: 2025-10-31
+      system: Chaterm + Claude Sonnet 4.5
+      score: 63.7
+      source: https://www.tbench.ai/leaderboard/terminal-bench/1.0
+    - date: 2025-11-08
+      system: Abacus AI Desktop (multi-model)
+      score: 62.3
+      source: https://www.tbench.ai/leaderboard/terminal-bench/1.0
+
+- benchmark: Terminal-Bench 2
+  category: cli_coding
+  description: Harder successor — 89 curated tasks across software engineering, biology, security, and gaming; each in an isolated Docker container with automated verification. Laude Institute / Stanford, Nov 2025.
+  description_zh: Terminal-Bench 升級版；89 個較難任務，涵蓋軟體工程、生物、資安與遊戲；每題在獨立 Docker 容器中自動驗證。Laude Institute / Stanford，2025 年 11 月。
+  human_baseline: null
+  human_baseline_note: No human pass-rate reported; paper reports expert time estimates and difficulty correlation
+  history:
+    - date: 2026-02-06
+      system: Simple Codex + GPT-5.3-Codex
+      score: 75.1
+      source: https://www.tbench.ai/leaderboard/terminal-bench/2.0
+    - date: 2026-02-22
+      system: Terminus-KIRA + Claude Opus 4.6
+      score: 74.7
+      source: https://www.tbench.ai/leaderboard/terminal-bench/2.0
+    - date: 2026-02-23
+      system: Terminus-KIRA + Gemini 3.1 Pro
+      score: 74.8
+      source: https://www.tbench.ai/leaderboard/terminal-bench/2.0
+    - date: 2026-02-24
+      system: Droid + GPT-5.3-Codex
+      score: 77.3
+      source: https://www.tbench.ai/leaderboard/terminal-bench/2.0
+    - date: 2026-03-02
+      system: ForgeCode + Gemini 3.1 Pro
+      score: 78.4
+      source: https://www.tbench.ai/leaderboard/terminal-bench/2.0
+    - date: 2026-03-12
+      system: ForgeCode + Claude Opus 4.6
+      score: 79.8
+      source: https://www.tbench.ai/leaderboard/terminal-bench/2.0
+    - date: 2026-03-12
+      system: ForgeCode + GPT-5.4
+      score: 81.8
+      source: https://www.tbench.ai/leaderboard/terminal-bench/2.0
+    - date: 2026-03-13
+      system: TongAgents + Gemini 3.1 Pro
+      score: 80.2
+      source: https://www.tbench.ai/leaderboard/terminal-bench/2.0
+    - date: 2026-04-01
+      system: Claude Opus 4.7
+      score: 69.4
+      source: https://www.anthropic.com/news/claude-opus-4-7
+
+- benchmark: BFCL
+  category: tool_use
+  description: Berkeley Function Calling Leaderboard — accuracy across single-turn, multi-turn, and agentic function calls.
+  description_zh: Berkeley Function Calling Leaderboard；涵蓋單輪、多輪與 agentic function calling 的準確率。
+  human_baseline: null
+  human_baseline_note: Not published — humans used only for ground-truth labeling
+  history:
+    - date: 2024-02-26
+      system: BFCL v1 launch SOTA
+      score: 83.8
+      source: https://gorilla.cs.berkeley.edu/blogs/8_berkeley_function_calling_leaderboard.html
+      note: Single-turn AST eval
+    - date: 2024-08-19
+      system: BFCL v2 SOTA
+      score: 75.0
+      source: https://gorilla.cs.berkeley.edu/blogs/8_berkeley_function_calling_leaderboard.html
+      note: Enterprise/OSS functions
+    - date: 2024-09-19
+      system: BFCL v3 SOTA (Claude 3.5 Sonnet)
+      score: 62.0
+      source: https://gorilla.cs.berkeley.edu/blogs/13_bfcl_v3_multi_turn.html
+      note: Multi-turn launch
+    - date: 2026-04-12
+      system: BFCL v4 Agentic leader
+      score: 72.0
+      source: https://gorilla.cs.berkeley.edu/leaderboard.html
+
+- benchmark: tau-bench
+  category: tool_use
+  description: Multi-turn, policy-sensitive tool use in retail and airline customer-support simulations.
+  description_zh: 零售與航空客服情境下的多輪、政策敏感工具調用。
+  human_baseline: null
+  human_baseline_note: Not published by benchmark authors
+  history:
+    - date: 2024-06-20
+      system: GPT-4o (retail, paper)
+      score: 61.0
+      source: https://arxiv.org/abs/2406.12045
+    - date: 2024-06-20
+      system: GPT-4o (airline, paper)
+      score: 35.2
+      source: https://arxiv.org/abs/2406.12045
+      note: Airline subset — harder
+    - date: 2024-10-22
+      system: Claude 3.5 Sonnet new (retail)
+      score: 69.2
+      source: https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
+    - date: 2024-10-22
+      system: Claude 3.5 Sonnet new (airline)
+      score: 46.0
+      source: https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
+      note: Airline subset
+    - date: 2024-12-20
+      system: OpenAI o1 (retail)
+      score: 73.5
+      source: https://www.anthropic.com/news/claude-3-7-sonnet
+    - date: 2025-02-24
+      system: Claude 3.7 Sonnet (retail)
+      score: 81.2
+      source: https://www.anthropic.com/news/claude-3-7-sonnet
+    - date: 2025-02-24
+      system: Claude 3.7 Sonnet (airline)
+      score: 58.4
+      source: https://www.anthropic.com/news/claude-3-7-sonnet
+      note: Airline subset
+    - date: 2025-09-29
+      system: Claude Sonnet 4.5 (retail)
+      score: 86.2
+      source: https://llm-stats.com/benchmarks/tau-bench-retail
+    - date: 2026-02-01
+      system: Claude Sonnet 4.6 (retail)
+      score: 87.5
+      source: https://benchlm.ai/benchmarks/tauBench
+      note: Aggregator source
+
+- benchmark: SpreadsheetBench
+  category: spreadsheet
+  description: End-to-end spreadsheet tasks — debugging, modeling, visualization in complex workbooks.
+  description_zh: 端到端試算表任務；在複雜工作簿中進行除錯、建模與視覺化。
+  human_baseline: 71.33
+  human_baseline_source: https://arxiv.org/html/2406.14991
+  human_baseline_note: 4 Excel experts, 50-instruction subset, soft-restriction metric
+  history:
+    - date: 2024-06-21
+      system: GPT-4o (paper)
+      score: 17.0
+      source: https://arxiv.org/abs/2406.14991
+    - date: 2024-06-21
+      system: Copilot in Excel (paper)
+      score: 20.0
+      source: https://arxiv.org/abs/2406.14991
+    - date: 2025-09-29
+      system: Claude Sonnet 4.5
+      score: 25.0
+      source: https://www.anthropic.com/news/claude-sonnet-4-5
+      note: SpreadsheetBench 2
+    - date: 2025-10-01
+      system: Gemini in Google Sheets
+      score: 70.48
+      source: https://www.spreadsheetbench.com/
+      note: Vendor-integrated agent mode
+    - date: 2025-10-01
+      system: Excel Agent Mode
+      score: 57.2
+      source: https://www.spreadsheetbench.com/
+    - date: 2025-10-01
+      system: ChatGPT agent
+      score: 45.5
+      source: https://www.spreadsheetbench.com/
+
+- benchmark: TheAgentCompany
+  category: assistant
+  description: Simulated company environment — email, scheduling, communication, cross-system coordination.
+  description_zh: 模擬公司環境；涵蓋 email、排程、溝通與跨系統協調。
+  human_baseline: null
+  human_baseline_note: Authors did not collect a human baseline (resource constraints)
+  history:
+    - date: 2024-12-18
+      system: Claude 3.5 Sonnet (autonomous, paper)
+      score: 24.0
+      source: https://arxiv.org/abs/2412.14161
+    - date: 2024-12-18
+      system: Claude 3.5 Sonnet (partial credit)
+      score: 34.4
+      source: https://arxiv.org/abs/2412.14161
+      note: Partial credit scoring
+    - date: 2024-12-18
+      system: Gemini 2.0 / Qwen (partial credit)
+      score: 4.2
+      source: https://arxiv.org/abs/2412.14161
+      note: Partial credit scoring
+    - date: 2025-06-01
+      system: Gemini 2.5 Pro (autonomous)
+      score: 30.3
+      source: https://arxiv.org/html/2412.14161v2
+    - date: 2025-06-01
+      system: Gemini 2.5 Pro (partial credit)
+      score: 39.3
+      source: https://arxiv.org/html/2412.14161v2
+      note: Partial credit scoring
+
+# LiveClawBench omitted — not locatable as of 2026-04-20. Possibly a typo of
+# LiveCodeBench or a very niche/unreleased benchmark. Confirm before re-adding.
+
+- benchmark: BEHAVIOR
+  category: robotics
+  description: Household robotic tasks — navigation, planning, manipulation in simulation.
+  description_zh: 模擬環境下的家務機器人任務；導航、規劃、操作。
+  human_baseline: null
+  human_baseline_note: Human VR demos used as reference trajectories, not scored as a baseline
+  history:
+    - date: 2025-09-02
+      system: NeurIPS 2025 Challenge launch baseline
+      score: 5.0
+      source: https://behavior.stanford.edu/challenge/index.html
+      note: Approximate — challenge leaderboard not in structured form
+    - date: 2025-12-07
+      system: NeurIPS 2025 Challenge winning entry (approx.)
+      score: 15.0
+      source: https://hai.stanford.edu/news/behavior-challenge-charts-the-way-forward-for-domestic-robotics
+      note: Approximate — verify against official results
+
+- benchmark: EmbodiedBench
+  category: robotics
+  description: Embodied agent evaluation — instruction following, navigation, manipulation across simulated tasks.
+  description_zh: Embodied agent 評測；涵蓋指令遵循、導航、與各類模擬任務的操作。
+  human_baseline: null
+  human_baseline_note: Not published by benchmark authors
+  history:
+    - date: 2025-02-13
+      system: GPT-4o (paper, avg across subsets)
+      score: 28.9
+      source: https://arxiv.org/abs/2502.09560
+    - date: 2025-02-13
+      system: Claude 3.5 Sonnet (paper)
+      score: 24.0
+      source: https://arxiv.org/abs/2502.09560
+    - date: 2025-02-13
+      system: Gemini 1.5 Pro (paper)
+      score: 22.0
+      source: https://arxiv.org/abs/2502.09560
+    - date: 2025-06-05
+      system: GPT-4o (paper v3)
+      score: 30.1
+      source: https://arxiv.org/pdf/2502.09560
