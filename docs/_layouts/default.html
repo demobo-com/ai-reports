@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- comment -%}
+  URL structure (post-2026-04 flip):
+    /<lang>/            → Current Progress (page_type: progress) — landing page
+    /<lang>/benchmark/  → Benchmark dashboard (page_type: benchmark) — secondary
+  Language switcher preserves the page type when toggling EN ↔ 中文.
+{%- endcomment -%}
+{%- assign ptype = page.page_type | default: "progress" -%}
+{%- if ptype == "benchmark" -%}
+  {%- assign en_url = "/en/benchmark/" -%}
+  {%- assign zh_url = "/zh-tw/benchmark/" -%}
+{%- else -%}
+  {%- assign en_url = "/en/" -%}
+  {%- assign zh_url = "/zh-tw/" -%}
+{%- endif -%}
+{%- assign progress_url_for_lang = "/" | append: lang | append: "/" -%}
+{%- assign bench_url_for_lang     = "/" | append: lang | append: "/benchmark/" -%}
+<html lang="{{ lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ t.site_title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="alternate" hreflang="en" href="{{ en_url | relative_url }}">
+  <link rel="alternate" hreflang="zh-Hant" href="{{ zh_url | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="{{ progress_url_for_lang | relative_url }}" class="site-title">{{ t.site_title }}</a>
+      <nav class="site-nav">
+        <a href="{{ progress_url_for_lang | relative_url }}"
+           {% if ptype == 'progress' %}class="active"{% endif %}>{{ t.nav_progress }}</a>
+        <a href="{{ bench_url_for_lang | relative_url }}"
+           {% if ptype == 'benchmark' %}class="active"{% endif %}>{{ t.nav_benchmark }}</a>
+        <span class="nav-sep" aria-hidden="true"></span>
+        <a href="{{ en_url | relative_url }}"
+           {% if lang == 'en' %}class="active"{% endif %}>{{ t.nav_lang_en }}</a>
+        <a href="{{ zh_url | relative_url }}"
+           {% if lang == 'zh-tw' %}class="active"{% endif %}>{{ t.nav_lang_zh }}</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      {%- comment -%}
+        Footer intentionally minimal. If you want to add content here, see
+        site.data.i18n for localized strings (both `en` and `zh-tw` keys).
+      {%- endcomment -%}
+    </div>
+  </footer>
+</body>
+</html>

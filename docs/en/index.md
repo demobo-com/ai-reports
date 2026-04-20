@@ -1,6 +1,20 @@
+---
+layout: page
+title: Current Progress (2026 Snapshot)
+permalink: /en/
+lang: en
+page_type: progress
+---
+
 # Agent Technology Progress by Category (2026 Snapshot)
 
-This document summarizes the current state of major agent action categories, including benchmark coverage, what systems can do today, and where they still fail.
+This document summarizes the current state of major agent action categories, including benchmark coverage, what systems can do today, and where they still fail. Sections are ordered by practical production maturity (most mature first), matching the [Benchmark dashboard]({{ '/en/benchmark/' | relative_url }}). Each section header shows a 0-100 maturity score (green ≥ 70, orange 40-69, red < 40).
+
+## Updates log
+
+<!-- Newest entries first. Weekly agent appends here. Cap at ~20 entries; archive older ones if the list grows long. -->
+
+- **2026-04-20** — Initial snapshot published. Seed data: 15 benchmarks across 7 categories, ~85 datapoints spanning 2023-07 through 2026-04.
 
 ## Executive Summary
 
@@ -14,101 +28,18 @@ A critical caveat: benchmark scores across categories are **not directly compara
 
 ---
 
-## 1. GUI / Computer Use
-
-### Main benchmark
-- **OSWorld**
-
-OSWorld evaluates real computer tasks across Ubuntu, Windows, and macOS, covering desktop applications, file manipulation, browser tasks, and cross-application workflows.
-
-The original OSWorld paper reported:
-- Human success rate: **72.36%**
-- Best model at the time: **12.24%**
-
-Later reported results from OpenAI's computer-using agent showed:
-- **38.1% on OSWorld**
-
-### What agents can do now
-Current computer-use agents can often complete:
-- short desktop workflows
-- basic file operations
-- form filling
-- copying information between apps
-- straightforward settings changes
-- visually simple multi-step procedures
-
-These systems are increasingly usable when the UI is clean and the task has limited branching.
-
-### What they still cannot do reliably
-They still struggle with:
-- GUI grounding
-- ambiguous interface elements
-- hidden state
-- pop-ups and modal interruptions
-- long workflows with recovery
-- unexpected layout changes
-- cross-app tasks where one mistake cascades
-
-In practice, agents often click the wrong thing, fail to recover from an interruption, or lose context after an unexpected dialog.
-
-### Bottom line
-Computer use is real and improving quickly, but it is not yet reliable enough for broad unsupervised delegation on a general desktop.
-
----
-
-## 2. Web / Browser Use
-
-### Main benchmarks
-- **WebArena**
-- **WebVoyager**
-- **VisualWebArena**
-- **BrowseComp**
-
-These benchmarks evaluate web navigation, information gathering, search persistence, form completion, and visually grounded browsing tasks.
-
-Reported results for OpenAI's CUA included:
-- **58.1% on WebArena**
-- **87.0% on WebVoyager**
-
-BrowseComp is a harder benchmark aimed at persistent search and difficult-to-find answers on the live web.
-
-### What agents can do now
-Browser agents are reasonably good at:
-- navigating mainstream websites
-- extracting specific information from multiple pages
-- completing moderate-length web forms
-- shopping comparison and information retrieval
-- interacting with dashboards and CRUD-style systems
-- handling moderately structured browsing workflows
-
-### What they still cannot do reliably
-They still struggle with:
-- dynamic or visually complex sites
-- authentication friction
-- anti-bot barriers
-- long branching workflows
-- unclear intent
-- combining context from multiple systems
-- end-to-end checkout or booking tasks with many hidden constraints
-
-A browser agent may succeed at finding candidate flights, but fail at the actual booking if loyalty rules, seat constraints, hidden fees, or policy nuances matter.
-
-### Bottom line
-Browser use is useful today, but reliability still drops sharply when workflows become long, ambiguous, or highly stateful.
-
----
-
-## 3. CLI / Terminal Use
+## 1. CLI / Coding {% include mat-badge.html score=85 %}
+{:#cli_coding}
 
 ### Main benchmarks
 - **SWE-bench Verified**
 - **SWE-bench-Live**
+- **Terminal-Bench** / **Terminal-Bench 2**
 
-These benchmarks evaluate coding agents on real software engineering tasks, such as fixing bugs, writing tests, and resolving GitHub issues in realistic repositories.
+These benchmarks evaluate coding agents on real software engineering tasks, such as fixing bugs, writing tests, resolving GitHub issues, and completing Linux terminal tasks.
 
 As of 2026, this is the strongest agent category.
-The official SWE-bench leaderboard has shown top systems reaching the high-70% range, and OpenAI reported:
-- **80.0% on SWE-bench Verified** for GPT-5.2
+The official SWE-bench leaderboard has shown top systems reaching the high-80% range, with Claude Opus 4.7 at **87.6% on SWE-bench Verified**. Terminal-Bench 2 tops around 80% for the best GPT-5.4 / ForgeCode combinations.
 
 ### What agents can do now
 CLI / coding agents are highly useful for:
@@ -135,7 +66,8 @@ CLI / coding agents are currently the most mature and commercially useful class 
 
 ---
 
-## 4. API / Tool Use / MCP-style Actions
+## 2. API / Tool Use {% include mat-badge.html score=72 %}
+{:#tool_use}
 
 ### Main benchmarks
 - **BFCL**
@@ -160,7 +92,7 @@ They still struggle with:
 - consistency across repeated runs
 - combining business rules, dialogue, and action execution
 
-This is the major gap between “valid function calling” and “dependable operational work.”
+This is the major gap between "valid function calling" and "dependable operational work."
 
 ### Bottom line
 Raw tool calling is already strong.
@@ -168,7 +100,8 @@ Reliable multi-step agentic tool use is much harder and still noticeably brittle
 
 ---
 
-## 5. File / Document / Spreadsheet Operations
+## 3. Spreadsheet / Files {% include mat-badge.html score=58 %}
+{:#spreadsheet}
 
 ### Main benchmark
 - **SpreadsheetBench**
@@ -205,12 +138,55 @@ Spreadsheet and file workflows are becoming genuinely useful, but reliability va
 
 ---
 
-## 6. Communication / Digital Assistant Workflows
+## 4. Web / Browser {% include mat-badge.html score=55 %}
+{:#browser}
+
+### Main benchmarks
+- **WebArena**
+- **WebVoyager**
+- **VisualWebArena**
+- **BrowseComp**
+
+These benchmarks evaluate web navigation, information gathering, search persistence, form completion, and visually grounded browsing tasks.
+
+Reported results for OpenAI's CUA included:
+- **58.1% on WebArena**
+- **87.0% on WebVoyager**
+
+WebVoyager has since been pushed above 97% by Surfer 2. BrowseComp is a harder benchmark aimed at persistent search and difficult-to-find answers on the live web; its humans baseline is only **29.2%**, reflecting how hard the questions are.
+
+### What agents can do now
+Browser agents are reasonably good at:
+- navigating mainstream websites
+- extracting specific information from multiple pages
+- completing moderate-length web forms
+- shopping comparison and information retrieval
+- interacting with dashboards and CRUD-style systems
+- handling moderately structured browsing workflows
+
+### What they still cannot do reliably
+They still struggle with:
+- dynamic or visually complex sites
+- authentication friction
+- anti-bot barriers
+- long branching workflows
+- unclear intent
+- combining context from multiple systems
+- end-to-end checkout or booking tasks with many hidden constraints
+
+A browser agent may succeed at finding candidate flights, but fail at the actual booking if loyalty rules, seat constraints, hidden fees, or policy nuances matter.
+
+### Bottom line
+Browser use is useful today, but reliability still drops sharply when workflows become long, ambiguous, or highly stateful.
+
+---
+
+## 5. Communication / Assistant {% include mat-badge.html score=38 %}
+{:#assistant}
 
 ### Main benchmark proxies
 - **TheAgentCompany**
 - **τ-bench**
-- **LiveClawBench**
 
 These benchmarks or benchmark-like environments capture parts of assistant work such as email, scheduling, communication, browsing, and multi-system coordination.
 
@@ -240,7 +216,50 @@ Communication-heavy agents are already useful as copilots, but they are not yet 
 
 ---
 
-## 7. Device / Hardware / Robotics Control
+## 6. GUI / Computer Use {% include mat-badge.html score=42 %}
+{:#gui_computer}
+
+### Main benchmark
+- **OSWorld**
+
+OSWorld evaluates real computer tasks across Ubuntu, Windows, and macOS, covering desktop applications, file manipulation, browser tasks, and cross-application workflows.
+
+The original OSWorld paper reported:
+- Human success rate: **72.36%**
+- Best model at the time: **12.24%**
+
+By 2026-Q1 the top model (Claude Opus 4.7) reaches **78.0% on OSWorld-Verified** — above the original human baseline, though the GUI / computer-use domain remains meaningfully less reliable than CLI or tool-use in practice.
+
+### What agents can do now
+Current computer-use agents can often complete:
+- short desktop workflows
+- basic file operations
+- form filling
+- copying information between apps
+- straightforward settings changes
+- visually simple multi-step procedures
+
+These systems are increasingly usable when the UI is clean and the task has limited branching.
+
+### What they still cannot do reliably
+They still struggle with:
+- GUI grounding
+- ambiguous interface elements
+- hidden state
+- pop-ups and modal interruptions
+- long workflows with recovery
+- unexpected layout changes
+- cross-app tasks where one mistake cascades
+
+In practice, agents often click the wrong thing, fail to recover from an interruption, or lose context after an unexpected dialog.
+
+### Bottom line
+Computer use is real and improving quickly, but it is not yet reliable enough for broad unsupervised delegation on a general desktop.
+
+---
+
+## 7. Device / Robotics {% include mat-badge.html score=22 %}
+{:#robotics}
 
 ### Main benchmarks
 - **BEHAVIOR**
@@ -270,22 +289,6 @@ They still struggle with:
 
 ### Bottom line
 Robotics and device-control agents remain the least mature category in terms of general-purpose reliability.
-
----
-
-## Relative Maturity Ranking (Practical View)
-
-From most mature to least mature:
-
-1. CLI / coding
-2. API / structured tool use
-3. Spreadsheet / file workflows
-4. Web / browser use
-5. Communication / assistant workflows
-6. GUI / full computer use
-7. Device / robotics control
-
-This ranking reflects practical production readiness, not hype.
 
 ---
 

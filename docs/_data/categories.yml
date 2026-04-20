@@ -1,0 +1,66 @@
+# maturity_score is an editorial 0-100 judgement of production-readiness, taking into
+# account both raw benchmark scores AND practical reliability (error recovery,
+# long-horizon stability, how well scores transfer from benchmarks to real work).
+#
+# Color tiers rendered in the UI:
+#   >= 70  → green  (mature, usable in production with standard safeguards)
+#   40-69  → orange (useful but brittle; copilot-grade, not autonomous)
+#   <  40  → red    (demos only; unreliable for delegated work)
+#
+# Update this score as the field evolves. Typically changes only a few points per quarter.
+
+- slug: cli_coding
+  name: CLI / Coding
+  name_zh: CLI / 程式開發
+  maturity_rank: 1
+  maturity_score: 85
+  summary: Fixing bugs, writing tests, repo-wide refactors. Most mature agent class today.
+  summary_zh: 修 bug、補測試、跨 repo 重構。目前最成熟的一類 agent。
+
+- slug: tool_use
+  name: API / Tool Use
+  name_zh: API / 工具使用
+  maturity_rank: 2
+  maturity_score: 72
+  summary: Structured function calling and MCP-style actions against bounded tools.
+  summary_zh: 針對受限工具集合的結構化 function calling 與 MCP 類動作。
+
+- slug: spreadsheet
+  name: Spreadsheet / Files
+  name_zh: 試算表 / 檔案
+  maturity_rank: 3
+  maturity_score: 58
+  summary: Formulas, workbook edits, visualizations across structured files.
+  summary_zh: 公式、工作簿編輯、視覺化；針對結構化檔案的操作。
+
+- slug: browser
+  name: Web / Browser
+  name_zh: 瀏覽器
+  maturity_rank: 4
+  maturity_score: 55
+  summary: Navigation, information gathering, form-filling, CRUD-style web workflows.
+  summary_zh: 網頁導航、資訊蒐集、表單填寫、CRUD 類網頁工作流。
+
+- slug: assistant
+  name: Communication / Assistant
+  name_zh: 溝通 / 助理
+  maturity_rank: 5
+  maturity_score: 38
+  summary: Email triage, meeting prep, scheduling, cross-system coordination.
+  summary_zh: Inbox triage、會前整理、排程、跨系統協調。
+
+- slug: gui_computer
+  name: GUI / Computer Use
+  name_zh: GUI / 電腦操作
+  maturity_rank: 6
+  maturity_score: 42
+  summary: Full desktop control across Ubuntu/Windows/macOS — clicking, typing, cross-app flows.
+  summary_zh: 跨 Ubuntu/Windows/macOS 的完整桌面操作；點擊、輸入、跨應用流程。
+
+- slug: robotics
+  name: Device / Robotics
+  name_zh: 裝置 / 機器人
+  maturity_rank: 7
+  maturity_score: 22
+  summary: Embodied agents, manipulation, navigation, sim-to-real transfer.
+  summary_zh: Embodied agent、操作、導航、模擬到實體的轉換。
