@@ -36,13 +36,15 @@ A small HDMI stick that plugs into any TV and generates digital signage on deman
 - One-shot generation — no long-horizon planning, no state to maintain.
 - Output is visually verifiable by a human.
 - Task scope is bounded — rectangular canvas, short text, optional images.
-- The hardware is dumb: it's just a browser renderer pointed at a server endpoint.
+- **The hardware can be trivially dumb: a media player (image / video / animation) pulling pre-rendered AI assets from cloud storage.** No browser, no live rendering, no HTML runtime on the dongle. Generation happens upstream in the cloud; the dongle just plays what's queued.
 
 ### What this unlocks for the customer
 
 - **Designer-quality output without hiring a designer.** Non-designers (shop owner, office manager, event host) can produce layouts that look professionally made. The model handles typography, hierarchy, color, whitespace.
-- **Real-time on-premise correction.** Staff standing in front of the TV can say *"bigger headline"*, *"swap to today's soup"*, or *"add a QR code to the lunch menu"* and the display updates in seconds. No back-and-forth with an external designer, no file re-uploads, no CMS portal.
+- **Motion content, not just static HTML.** Because generation is decoupled from display, the dongle can play anything the cloud can render — short video loops, animated transitions, Ken Burns motion on photos — on the same cheap hardware.
+- **Real-time on-premise correction.** Staff standing in front of the TV can say *"bigger headline"*, *"swap to today's soup"*, or *"add a QR code to the lunch menu"*. The cloud regenerates the asset, pushes to the dongle, display updates within seconds.
 - **Context-aware content refresh.** Tie it to time/day/occupancy and the signage adapts itself: lunch specials auto-switch to dinner, meeting rooms update their "next session" card, waiting rooms rotate through relevant messages.
+- **Cheap to scale.** Generation happens once per variation and caches on a CDN. A 50-location chain pays for one render, not 50. Fleet-wide refreshes are just cache invalidations.
 
 Go-to-market: restaurants, conference rooms, retail, small offices, real-estate open houses, clinics, coworking lobbies.
 MVP risk: low — the hardest engineering is the content-generation UX, not autonomy.
