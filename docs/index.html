@@ -8,12 +8,12 @@ sitemap: false
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=/en/">
-  <link rel="canonical" href="/en/">
+  <meta http-equiv="refresh" content="0; url={{ '/en/' | relative_url }}">
+  <link rel="canonical" href="{{ '/en/' | relative_url }}">
   <title>AI Agent Progress</title>
-  <script>location.replace("/en/");</script>
+  <script>location.replace({{ '/en/' | relative_url | jsonify }});</script>
 </head>
 <body>
-  <p>Redirecting to <a href="/en/">/en/</a>…</p>
+  <p>Redirecting to <a href="{{ '/en/' | relative_url }}">{{ '/en/' | relative_url }}</a>…</p>
 </body>
 </html>
