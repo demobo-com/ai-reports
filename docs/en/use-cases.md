@@ -36,6 +36,16 @@ A small HDMI stick that plugs into any TV and generates digital signage on deman
 - **Context-aware content refresh.** Tie it to time/day/occupancy and the signage adapts itself: lunch specials auto-switch to dinner, meeting rooms update their "next session" card, waiting rooms rotate through relevant messages.
 - **Cheap to scale.** Generation happens once per variation and caches on a CDN. A chain with 50 locations pays for one render, not 50. Fleet-wide refreshes are just cache invalidations.
 
+**Input methods — how users request content**
+
+Three options, each with distinct hardware and UX tradeoffs:
+
+1. **Voice via microphone on the dongle** — most natural UX (*"waiting-room greeting, bigger headline"*). Requires mic hardware + an audio pipeline — higher BOM, more privacy surface.
+2. **Dedicated email or WhatsApp account per dongle** — user texts or emails the dongle's assigned address (*"menu for today's special: arugula salad"*). No mic needed; hardware stays trivially dumb. Text is explicit, auditable, asynchronous — convenient enough for most cases.
+3. **Companion web app or mobile app** — structured form with templates, media upload, scheduling. Most control, heaviest UX — the user has to open the app.
+
+**Recommended MVP: option 2 (email / WhatsApp).** Cheapest hardware, fastest to ship, and fits how small-business staff already communicate every day. Voice can ship as a v2 upgrade once there's a fleet to justify the mic BOM.
+
 **Go-to-market:** restaurants, conference rooms, retail, small offices, real-estate open houses, clinics, coworking lobbies.
 
 ---
